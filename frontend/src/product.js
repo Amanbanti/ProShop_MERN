@@ -1,7 +1,7 @@
 const products = [
     {
       _id: "1",
-      name: "Product 1",
+      name: "Product 111111111111111111111111111111111111",
       image: "/images/airpods.jpg",
       description: "This is the description for Product 1",
       brand: "Brand A",
@@ -10,7 +10,7 @@ const products = [
       countInStock: 10,
       rating: 4.5,
       numReviews: 12,
-    },
+    }, 
     {
       _id: "2",
       name: "Product 2",
