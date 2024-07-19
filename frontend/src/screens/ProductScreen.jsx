@@ -12,13 +12,13 @@ const ProductScreen = () => {
     useEffect(()=> {
       const fetchProducts = async () =>{
         const {data} = await axios.get('/api/product/'+productId);
+        //axios used to send a req to the server with specifed id
         setProducts(data);
       };
       fetchProducts ();
     },[productId]);
 
  
-   
 
 
 
