@@ -1,7 +1,7 @@
 const products = [
     {
       _id: "1",
-      name: "Product 111111111111111111111111111111111111",
+      name: "Airpods",
       image: "/images/airpods.jpg",
       description: "This is the description for Product 1",
       brand: "Brand A",
@@ -13,7 +13,7 @@ const products = [
     }, 
     {
       _id: "2",
-      name: "Product 2",
+      name: "Alexa",
       image: "/images/alexa.jpg",
       description: "This is the description for Product 2",
       brand: "Brand B",
@@ -25,7 +25,7 @@ const products = [
     },
     {
       _id: "3",
-      name: "Product 3",
+      name: "Camera",
       image: "/images/camera.jpg",
       description: "This is the description for Product 3",
       brand: "Brand C",
@@ -37,7 +37,7 @@ const products = [
     },
     {
       _id: "4",
-      name: "Product 4",
+      name: "Mouse",
       image: "/images/mouse.jpg",
       description: "This is the description for Product 4",
       brand: "Brand D",
@@ -49,7 +49,7 @@ const products = [
     },
     {
       _id: "5",
-      name: "Product 5",
+      name: "Phone",
       image: "/images/phone.jpg",
       description: "This is the description for Product 5",
       brand: "Brand E",
@@ -61,7 +61,7 @@ const products = [
     },
     {
         _id: "6",
-        name: "Product 6",
+        name: "Playstation",
         image: "/images/playstation.jpg",
         description: "This is the description for Product 5",
         brand: "Brand E",
@@ -71,7 +71,7 @@ const products = [
         rating: 4.8,
         numReviews: 25,
       },
-   
+      
   ];
   
   export default products;
