@@ -1,12 +1,11 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useState } from 'react';
 import { Link } from 'react-router-dom'
 import {Row,Col,Image,ListGroup,Card,Button, ListGroupItem} from 'react-bootstrap';
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice.js';
 import Rating from '../components/Rating.jsx'
 import Loader from '../components/Loader.jsx';
-
+import Message from '../components/Message.jsx';
 
 
 const ProductScreen = () => {
@@ -17,14 +16,18 @@ const ProductScreen = () => {
   return (
 
     <>
+           <Link className='btn btn-light my-3' to='/'>Go Back</Link>
+ 
 
             {isLoading ? (
                     <Loader/>
-                ) :error ? (<div>
+                ) :error ? (
+                    <Message variant='danger'>
                     {error?.data?.message || error.error}
-                </div> ): (<>
+                  </Message> 
+                ): (<>
                 
-                                    <Link className='btn btn-light my-3' to='/'>Go Back</Link>
+              
                         <Row>
                             <Col md={5}>
                                 <Image src={product.image} alt={product.name} fluid />
