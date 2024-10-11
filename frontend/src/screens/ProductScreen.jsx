@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import {Row,Col,Image,ListGroup,Card,Button, ListGroupItem} from 'react-bootstrap';
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice.js';
 import Rating from '../components/Rating.jsx'
+import Loader from '../components/Loader.jsx';
 
 
 
@@ -18,7 +19,7 @@ const ProductScreen = () => {
     <>
 
             {isLoading ? (
-                    <h2>Loading...</h2>
+                    <Loader/>
                 ) :error ? (<div>
                     {error?.data?.message || error.error}
                 </div> ): (<>
@@ -74,7 +75,7 @@ const ProductScreen = () => {
 
                             
 
-                            
+
                                         <ListGroup.Item>
                                             <Row>
                                                 <Col>Status:</Col>
