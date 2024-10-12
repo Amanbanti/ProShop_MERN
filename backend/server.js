@@ -1,5 +1,7 @@
 import express from 'express';
 import productRoute from './routes/productRoute.js';
+import userRoute from './routes/userRoutes.js';
+
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
@@ -30,13 +32,16 @@ const startServer = async () => {
   }
 };
 
-// Basic API route
+
 app.get('/', (req, res) => {
   res.send('API is Running...');
 });
 
 // Product routes
 app.use('/api/products', productRoute);
+
+
+app.use('/api/users', userRoute);
 
 // Error handling middleware
 app.use(notFound);  // Handle 404 errors
