@@ -7,7 +7,7 @@ const products = [
       brand: "Brand A",
       category: "Category A",
       price: 29.99,
-      countInStock: 10,
+      countInStock: 40,
       rating: 4.5,
       numReviews: 12,
     }, 
