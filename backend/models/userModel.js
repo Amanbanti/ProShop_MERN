@@ -28,15 +28,17 @@ userSchema.methods.matchPassword =async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password);
 }
 
-//encrpting the password
-userSchema.pre('save',async function(next){
-    if(!this.isModified(this.password)){
-        next()
+// Encrypting the password
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        return next(); // If password is not modified, move to the next middleware
     }
     
     const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password,salt);
-})
+    this.password = await bcrypt.hash(this.password, salt);
+    next(); // Move to the next middleware after hashing
+});
+
 
 const User = mongoose.model("User" ,userSchema);
 
