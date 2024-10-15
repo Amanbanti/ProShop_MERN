@@ -1,7 +1,7 @@
 
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from '../models/userModel.js';
-import jwt from "jsonwebtoken";
+import { generateToken } from "../utils/generateToken.js";
 
 
 export const authUser = asyncHandler (async (req, res) =>{
@@ -11,19 +11,8 @@ export const authUser = asyncHandler (async (req, res) =>{
         email: email
     })
     if(user && (await user.matchPassword(password))){
-        const token = jwt.sign({userId:user._id},process.env.JWT_SECRET
-            ,{
-                expiresIn: '30d'
-            });
-
-        //set JWT as HTTP-Only cookie
-        res.cookie('jwt', token,{
-            httpOnly:true,
-            secure: process.env.NODE_ENV !== 'development',
-            sameSite : 'strict',
-            maxAge:30 * 24 * 60 * 1000 //30days
-        })
-
+        
+        generateToken ( res,user._id)
         res.json({
             _id:user._id,
             name: user.name,
@@ -43,8 +32,33 @@ export const authUser = asyncHandler (async (req, res) =>{
 
 
 export const registerUser = asyncHandler (async (req, res) =>{
-    
-    res.send("registerUser ");
+    const {name, email,password} = req.body;
+    const userExist = await User.findOne({
+        email: email
+    })
+
+    if( userExist){
+        res.status(400);
+        throw new Error('User Already Exist!')
+    }else{
+        const user = await User.create({
+            name : name,
+            email: email,
+            password: password,
+        })
+        if(user){
+        generateToken ( res,user._id)
+           res.status(201).json({
+            _id:user._id,
+            name: user.name,
+            email:user.email,
+            isAdmin: user.isAdmin
+           })
+        }else{
+            res.status(400);
+            throw new Error('Invalid User Data!')
+           }
+    }
 
 });
 
@@ -55,8 +69,6 @@ export const registerUser = asyncHandler (async (req, res) =>{
 export const logoutUser = asyncHandler(async (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
-        secure: process.env.NODE_ENV !== 'development',
-        sameSite: 'strict',
         expires: new Date(0), // Expire the cookie
     });
 
