@@ -108,10 +108,11 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
 
         // Check if the password is provided in the request body
         if (req.body.password) {
-            user.password = req.body.password; // This will trigger the pre-save middleware to hash the password
+            user.password = req.body.password; 
         }
 
         const updatedUser = await user.save();
+        // This will trigger the pre-save middleware to hash the password
 
         res.status(200).json({
             _id: updatedUser._id,
