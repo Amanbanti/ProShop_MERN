@@ -1,18 +1,33 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import {Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import logo from '../assets/logo.png'
 import  {LinkContainer} from 'react-router-bootstrap';
-import { UseSelector, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import {logout} from '../slices/authSlice.js'
 const Header = () => {
-    const {cartItems} = useSelector((state)=> state.cart)
-    const {userInfo} = useSelector((state)=> state.auth)
+    const { cartItems } = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const [logoutApiCall] = useLogoutMutation();
 
-    const logoutHandler = () =>{
-        console.log('logout Handler')
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      // NOTE: here we need to reset cart state for when a user logs out so the next
+      // user doesn't inherit the previous users cart and shipping
+    //   dispatch(resetCart());
+      navigate('/login');
+    } catch (err) {
+      console.error(err);
     }
+}
   
   
   return (
@@ -50,7 +65,7 @@ const Header = () => {
                                     <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>
                                 <NavDropdown.Item onClick={logoutHandler}>
-                                    Logout
+                                    Logout 
                                 </NavDropdown.Item>
                               
                             </NavDropdown>
