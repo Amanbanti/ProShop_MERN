@@ -1,6 +1,7 @@
 import express from 'express';
 import productRoute from './routes/productRoute.js';
 import userRoute from './routes/userRoutes.js';
+import orderRoute from './routes/orderRotes.js'
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
@@ -48,6 +49,10 @@ app.use('/api/users', userRoute);
 
 // Product routes
 app.use('/api/products', productRoute);
+
+
+// Order routes
+app.use('/api/orders', orderRoute);
 
 
 
