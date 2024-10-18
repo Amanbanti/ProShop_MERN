@@ -32,12 +32,12 @@ const PaymentScreen = () => {
 
         <Form onSubmit={submitHandler}>
             <Form.Group>
-                <Form.Label as='legend'>select Method</Form.Label>
+                <Form.Label as='legend'>Select Method</Form.Label>
                 <Col>
                     <Form.Check 
                     type='radio'
                     className='my-2'
-                    label='payPal or Credit Card'
+                    label='PayPal or Credit Card'
                     id='PayPal'
                     name='paymentMethod'
                     value='PayPal'
