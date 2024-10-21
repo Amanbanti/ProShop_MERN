@@ -1,5 +1,5 @@
 import { useState,useEffect} from 'react'
-import {Row,Button,Col,Card,ListGroup,Image, ListGroupItem} from 'react-bootstrap'
+import {Row,Button,Col,Card,ListGroup,Image} from 'react-bootstrap'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { useSelector,useDispatch } from 'react-redux';
 import { Link,useNavigate } from 'react-router-dom';
@@ -42,7 +42,8 @@ const PlaceOrderScreen = () => {
             }).unwrap();
 
         dispatch(clearCartItems());
-        navigate(`/order/$(res._id)`);
+        navigate(`/order/${res._id}`);
+
         }catch(error){
             toast.error(error);
         }
@@ -93,7 +94,7 @@ const PlaceOrderScreen = () => {
                                             </Col>
 
                                             <Col>
-                                            {item.qty} x ${item.price} = ${item.qty*item.price }
+                                                {item.qty} x ${item.price} = ${item.qty*item.price }
                                             </Col>
 
                                             
