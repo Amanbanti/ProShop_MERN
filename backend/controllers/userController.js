@@ -112,7 +112,7 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
         }
 
         const updatedUser = await user.save();
-        // This will trigger the pre-save middleware to hash the password
+        // This will trigger the pre-save middleware to hash the password in the user model
 
         res.status(200).json({
             _id: updatedUser._id,
