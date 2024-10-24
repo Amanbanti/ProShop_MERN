@@ -107,8 +107,19 @@ export const getOrderById = asyncHandler (async (req, res) =>{
 // @desc    Update order to delivered
 // @route   GET /api/orders/:id/deliver
 // @access  Private/Admin
- export const updateOrderToDelivered= asyncHandler (async (req, res) =>{
-    res.send('updateOrderToDelivered');
+ export const updateOrderToDelivered = asyncHandler (async (req, res) =>{
+    const order = await Order.findById(req.params.id);
+    if(order){
+        order. isDelivered = true;
+        order.deliveredAt= Date.now();
+
+        const updateOrder = await order.save()
+        res.status(200).json(updateOrder);
+         
+    }else{
+        res.status(404);
+        throw new Error ('Order not found!')
+    }
  
  });
 
@@ -121,6 +132,7 @@ export const getOrderById = asyncHandler (async (req, res) =>{
 // @route   GET /api/orders
 // @access  Private/Admin
  export const getOrders = asyncHandler (async (req, res) =>{
-    res.send('getOrders');
+    const orders =   await Order.find({}).populate('user','id name');
+    res.status(200).json(orders);
  
  });
