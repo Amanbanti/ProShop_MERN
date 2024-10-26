@@ -2,7 +2,7 @@ import { useGetProductsQuery , useCreateProductMutation} from "../../slices/prod
 import { LinkContainer } from "react-router-bootstrap"
 import {Table,Button,Row,Col} from 'react-bootstrap';
 import Message from "../../components/Message";
-import { FaTimes, FaEdit,FaTrash} from "react-icons/fa";
+import { FaEdit,FaTrash} from "react-icons/fa";
 import Loader from "../../components/Loader";
 import {toast} from 'react-toastify';
 
