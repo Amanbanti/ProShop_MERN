@@ -7,7 +7,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: PRODUCTS_URL, // Correct API URL to fetch products
             }),
-            providesTags:['Product'],
+            providesTags:['Products'],
             keepUnusedDataFor: 5, // Cache timeout of 5 seconds
           
         }),
