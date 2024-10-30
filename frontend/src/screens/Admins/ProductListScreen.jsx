@@ -1,21 +1,35 @@
-import { useGetProductsQuery , useCreateProductMutation} from "../../slices/productsApiSlice"
+import { Table, Button, Row, Col } from 'react-bootstrap';
+import { FaEdit, FaPlus, FaTrash } from 'react-icons/fa';
+import { Link, useParams } from 'react-router-dom';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import {
+  useGetProductsQuery,
+  useDeleteProductMutation,
+  useCreateProductMutation,
+} from '../../slices/productsApiSlice';
+import { toast } from 'react-toastify';
 import { LinkContainer } from "react-router-bootstrap"
-import {Table,Button,Row,Col} from 'react-bootstrap';
-import Message from "../../components/Message";
-import { FaEdit,FaTrash} from "react-icons/fa";
-import Loader from "../../components/Loader";
-import {toast} from 'react-toastify';
+
 
 const ProductListScreen = () => {
   const {data:products, isLoading,error,refetch} = useGetProductsQuery();
  
   const [createProduct, {isLoading:loadingCreate}]= useCreateProductMutation();
 
-  //thsi is working
-  const deleteHandler = (id) =>{
-    
-  }
-  
+  const [deleteProduct, { isLoading: loadingDelete }] =
+  useDeleteProductMutation();
+
+  const deleteHandler = async (id) => {
+    if (window.confirm('Are you sure? You want to delete the product?')) {
+      try {
+        await deleteProduct(id);
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  };
   const createProductHandler = async()=>{
         if(window.confirm('Are you sure you want to create a new Product?')){
             try {
