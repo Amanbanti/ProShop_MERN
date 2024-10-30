@@ -11,6 +11,7 @@ const ProductListScreen = () => {
  
   const [createProduct, {isLoading:loadingCreate}]= useCreateProductMutation();
 
+  //thsi is working
   const deleteHandler = (id) =>{
     
   }
