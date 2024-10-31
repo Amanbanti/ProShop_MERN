@@ -3,26 +3,27 @@ import { FaTimes,FaEdit, FaCheck, FaTrash } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import {useGetUsersQuery} from '../../slices/usersApiSlice'
+import {useGetUsersQuery,useDeleteUserMutation} from '../../slices/usersApiSlice'
 import { toast } from 'react-toastify';
 import { LinkContainer } from "react-router-bootstrap"
 
 
 const UserListScreen = () => {
-  const {data:users, isLoading,error,refetch} = useGetUsersQuery();
+  const [deleteUser, {isLoading:isDeleting}] = useDeleteUserMutation();
  
 
-
+  const {data:users, isLoading,error,refetch} = useGetUsersQuery();
 
   const deleteHandler = async (id) => {
-    // if (window.confirm('Are you sure? You want to delete the product?')) {
-    //   try {
-    //     await deleteProduct(id);
-    //     refetch();
-    //   } catch (err) {
-    //     toast.error(err?.data?.message || err.error);
-    //   }
-    // }
+    if (window.confirm('Are you sure? You want to delete this user?')) {
+      try {
+        await deleteUser(id);
+        toast.success('User Deleted!')
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
   };
 
 
@@ -36,7 +37,7 @@ const UserListScreen = () => {
 
         </Row>
         
-
+      {isDeleting && <Loader/>}
       {isLoading ? <Loader/> : error ? <Message variant='danger'>
       {error?.data?.message || error.message || 'An error occurred'}
       </Message> :(
