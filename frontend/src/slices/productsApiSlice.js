@@ -4,8 +4,11 @@ import { apiSlice } from './apiSlice';
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
+      query: ({pageNumber}) => ({
           url: PRODUCTS_URL, // Correct API URL to fetch products
+          params:{
+            pageNumber,
+          }
       }),
       providesTags:['Products'],
       keepUnusedDataFor: 5, // Cache timeout of 5 seconds
