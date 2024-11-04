@@ -18,7 +18,6 @@ const UserListScreen = () => {
     if (window.confirm('Are you sure? You want to delete this user?')) {
       try {
         await deleteUser(id);
-        toast.success('User Deleted!')
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
