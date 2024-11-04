@@ -3,7 +3,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Product from '../models/productModel.js';
 
 export const getProducts = asyncHandler(async (req, res) => {
-    const pageSize = 2;
+    const pageSize = 8;
     const page = Number(req.query.pageNumber) || 1;
   
     const keyword = req.query.keyword
@@ -14,7 +14,8 @@ export const getProducts = asyncHandler(async (req, res) => {
           },
         }
       : {};
-  
+    // if there is a keyword it retrive a products similar with 
+    //the keyword otherwise it fetch all the products
     const count = await Product.countDocuments({ ...keyword });
     const products = await Product.find({ ...keyword })
       .limit(pageSize)
