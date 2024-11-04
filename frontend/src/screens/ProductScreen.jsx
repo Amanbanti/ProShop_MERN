@@ -6,7 +6,7 @@ import { useGetProductDetailsQuery, useCreateReviewMutation } from '../slices/pr
 import Rating from '../components/Rating.jsx'
 import Loader from '../components/Loader.jsx';
 import Message from '../components/Message.jsx';
-import { UseSelector, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {addToCart} from '../slices/cartSlice.js'
 import {toast} from 'react-toastify'
 
@@ -226,7 +226,7 @@ const ProductScreen = () => {
                                         >
                                             Submit
                                         </Button>
-                                        </Form>
+                                    </Form>
                     ) : (
                         <Message>
                         Please <Link to='/login'>sign in</Link> to write a review!
