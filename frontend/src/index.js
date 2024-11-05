@@ -11,6 +11,7 @@ import store from './store';
 import { Provider } from 'react-redux';
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 // import 'bootstrap/dist/css/bootstrap.min.css'
+import {HelmetProvider} from 'react-helmet-async'
 import './assets/styles/bootstrap.custom.css';
 import './assets/styles/index.css';
 import App from './App';
@@ -71,15 +72,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // store is redux provider
   <React.StrictMode>
-    
+    <HelmetProvider>
     <Provider store={store}>
        
         <PayPalScriptProvider deferLoading={true}>
           <RouterProvider router={router}/>
         </PayPalScriptProvider>
     </Provider>
-     
+  </HelmetProvider>
   </React.StrictMode>
 );
+
   
 reportWebVitals();

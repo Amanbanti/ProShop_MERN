@@ -9,7 +9,7 @@ import Message from '../components/Message.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import {addToCart} from '../slices/cartSlice.js'
 import {toast} from 'react-toastify'
-
+import Meta from '../components/Meta.jsx';
 
 const ProductScreen = () => {
     const {id:productId} = useParams();
@@ -62,6 +62,7 @@ const ProductScreen = () => {
                 
             <>
 
+                <Meta title={product.name} />
 
                 <Row>
                 <Col md={5}>
@@ -70,7 +71,7 @@ const ProductScreen = () => {
                 </Col>
 
 
-                <Col md={4}>
+                <Col md={4}> 
                     <ListGroup variant='flush'>
                         <ListGroup.Item>
                             <h3>{product.name}</h3> 
