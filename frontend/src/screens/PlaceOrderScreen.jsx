@@ -3,7 +3,7 @@ import {Row,Button,Col,Card,ListGroup,Image} from 'react-bootstrap'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { useSelector,useDispatch } from 'react-redux';
 import { Link,useNavigate } from 'react-router-dom';
-import { savePaymentMethod } from '../slices/cartSlice';
+ 
 import {toast} from 'react-toastify';
 import Loader from '../components/Loader';
 import { useCreateOrderMutation } from '../slices/ordersApiSlice';
